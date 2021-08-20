@@ -1,14 +1,32 @@
 package com.binh.cookiefilter.parser;
 
 import com.binh.cookiefilter.exception.LogParsingException;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static java.nio.file.Files.newBufferedReader;
+import java.util.List;
+
+import static java.nio.file.Paths.get;
 import static java.time.LocalDate.parse;
 
 public class LogParser {
   private static final Logger LOGGER = LoggerFactory.getLogger(LogParser.class);
+
+  /** Parsing CSV log file content */
+  public static List<LogEntry> parseLog(String fileName) throws LogParsingException {
+    try {
+      return new CsvToBeanBuilder<LogEntry>(newBufferedReader(get(fileName)))
+          .withType(LogEntry.class)
+          .build()
+          .parse();
+    } catch (Exception e) {
+      LOGGER.error(e.getMessage());
+      throw new LogParsingException(e);
+    }
+  }
 
   /** Parsing command line input */
   public static CommandInput parseCommandInput(String[] args) throws LogParsingException {
@@ -28,7 +46,7 @@ public class LogParser {
     }
   }
 
-  /** Parsing command line options (file name and selected date) using Apache Commons CLI library */
+  /** Parsing command line options (file name and selected date) */
   public static Options parseCommandOption() {
     Options commandOptions = new Options();
 
