@@ -10,7 +10,7 @@ public class LogEntry {
   private String cookie;
 
   @CsvBindByPosition(position = 1) // second column, i.e timestamp
-  @CsvDate(value = "yyyy-MM-dd'T'HH:mm:ss'00+00:00'")
+  @CsvDate(value = "yyyy-MM-dd'T'HH:mm:ssXXX")
   private LocalDateTime timestamp;
 
   /** getter, setter, not allow to use Lombok or any additional libraries here */
