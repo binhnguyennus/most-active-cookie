@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 /** Implementation for the interface Filter */
-public class FilterImpl implements Filter {
+public class CookieFilterImpl implements CookieFilter {
   @Override
   public void filterMostActiveCookies(CommandInput commandInput) throws LogParsingException {
     // Parse input and take the list of cookie entries
