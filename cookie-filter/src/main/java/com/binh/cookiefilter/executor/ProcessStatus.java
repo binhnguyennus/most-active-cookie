@@ -4,7 +4,7 @@ public enum ProcessStatus {
   SUCCESS(0),
   PROGRAM_FAILED(1);
 
-  private int value;
+  private final int value;
 
   ProcessStatus(int value) {
     this.value = value;
