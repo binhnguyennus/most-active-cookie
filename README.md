@@ -1,6 +1,10 @@
 # most-active-cookie
 Process a cookie log and return the most active cookie for a specific day
 
+## Tech
+
+- Java 11, Spring Boot (framework), Maven (build tool)
+
 ## Requirements
 
 Given a cookie log file in the following format:
@@ -41,3 +45,29 @@ We define the most active cookie as one seen in the log the most times during a 
 - You can assume -d parameter takes date in UTC time zone.
 - You have enough memory to store the contents of the whole file.
 - Cookies in the log file are sorted by timestamp (most recent occurrence is the first line of the file).
+
+## Build
+
+- Go to directory: cookie-filter
+- Using Maven to build and package the code into a jar file: 
+
+~~~
+mvn clean package
+~~~
+
+## Run
+
+- Still stand at the directory: cookie-filter
+- Run the compiled jar file:
+
+~~~
+java -jar target\cookie-filter-version-SNAPSHOT.jar -f csv-file-path -d selected-date
+~~~
+
+- Example:
+
+~~~
+java -jar target\cookie-filter-0.0.1-SNAPSHOT.jar -f src\logs\cookie_log.csv -d 2018-12-09
+~~~
+
+[Example Result](https://imgur.com/XjFo95d)
