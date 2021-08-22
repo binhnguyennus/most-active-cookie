@@ -49,11 +49,13 @@ We define the most active cookie as one seen in the log the most times during a 
 ## Build
 
 - Go to directory: cookie-filter
-- Using Maven to build and package the code into a jar file: 
+- Using Maven to build and package source code into a jar file: 
 
 ~~~
 mvn clean package
 ~~~
+
+[Build Successful](https://imgur.com/FTQgUIY)
 
 ## Run
 
@@ -70,4 +72,4 @@ java -jar target\cookie-filter-version-SNAPSHOT.jar -f csv-file-path -d selected
 java -jar target\cookie-filter-0.0.1-SNAPSHOT.jar -f src\logs\cookie_log.csv -d 2018-12-09
 ~~~
 
-[Example Result](https://imgur.com/XjFo95d)
+[Run Successful](https://imgur.com/qYY7pCl)

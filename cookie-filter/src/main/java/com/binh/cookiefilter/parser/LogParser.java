@@ -20,6 +20,7 @@ public class LogParser {
     try {
       return new CsvToBeanBuilder<LogEntry>(newBufferedReader(get(fileName)))
           .withType(LogEntry.class)
+          .withFilter(line -> !line[0].contains("cookie"))
           .build()
           .parse();
     } catch (Exception e) {
