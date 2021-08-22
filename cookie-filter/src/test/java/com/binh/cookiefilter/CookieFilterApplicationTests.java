@@ -35,13 +35,27 @@ class CookieFilterApplicationTests {
     System.setOut(stdout);
   }
 
-  /** When file path and date are valid, print cookie strings */
+  /** When file path and date are valid, output the most active cookie strings */
   @Test
   public void filterMostActiveCookies_ValidFilePathAndDate_OutputCookieStrings()
       throws LogParsingException {
     CommandInput commandInput = new CommandInput("src/logs/cookie_log.csv", parse("2018-12-09"));
     cookieFilter.filterMostActiveCookies(commandInput);
     assertThat(byteArrayOutputStream.toString().contains("AtY0laUfhglK3lC7"));
+    assertThat(!byteArrayOutputStream.toString().contains("SAZuXPGUrfbcn5UA"));
+    assertThat(!byteArrayOutputStream.toString().contains("5UAVanZf6UtGyKVS"));
+    assertThat(!byteArrayOutputStream.toString().contains("AtY0laUfhglK3lC7"));
+  }
+
+  /** When a specific date has more than one most active cookies, output all of them */
+  @Test
+  public void filterMostActiveCookies_HasMoreThanOneMostActiveCookies_OutputAllOfThem()
+      throws LogParsingException {
+    CommandInput commandInput = new CommandInput("src/logs/cookie_log.csv", parse("2018-12-06"));
+    cookieFilter.filterMostActiveCookies(commandInput);
+    assertThat(byteArrayOutputStream.toString().contains("8xYHIASHaBa79xzf"));
+    assertThat(byteArrayOutputStream.toString().contains("1dSLJdsaDJLDsdSd"));
+    assertThat(!byteArrayOutputStream.toString().contains("A8SADNasdNadBBda"));
   }
 
   /** When file path is invalid, throw exception */
@@ -52,7 +66,7 @@ class CookieFilterApplicationTests {
         .isInstanceOf(LogParsingException.class);
   }
 
-  /** When date is not exist, output should be empty */
+  /** When date is not exist, output is empty (no cookie) */
   @Test
   public void filterMostActiveCookies_InvalidDate_ThrowException() throws LogParsingException {
     CommandInput commandInput = new CommandInput("src/logs/cookie_log.csv", parse("2021-12-09"));
